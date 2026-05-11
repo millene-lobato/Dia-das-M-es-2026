@@ -1,353 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>Cartinha 💖</title>
+  <title>Cartinha Pra Você 💖</title>
 
-<style>
-
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-/* FUNDO */
-body{
-  height:100vh;
-  overflow:hidden;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  background:linear-gradient(to bottom,#ffd6e7,#ffb3d1);
-
-  font-family:Arial, sans-serif;
-
-  position:relative;
-}
-
-/* CORAÇÕES */
-#hearts{
-  position:absolute;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.heart{
-  position:absolute;
-  bottom:-40px;
-
-  color:#ff2e74;
-
-  animation:subir linear forwards;
-
-  opacity:0;
-}
-
-@keyframes subir{
-
-  0%{
-    transform:translateY(0) scale(0.5);
-    opacity:0;
-  }
-
-  20%{
-    opacity:1;
-  }
-
-  100%{
-    transform:translateY(-120vh) scale(1.4);
-    opacity:0;
-  }
-
-}
-
-/* CONTAINER */
-.container{
-  position:relative;
-
-  width:90vw;
-  max-width:340px;
-
-  height:260px;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-/* ENVELOPE */
-.envelope{
-  position:absolute;
-
-  width:100%;
-  height:200px;
-
-  background:#fff0f5;
-
-  border-radius:18px;
-
-  box-shadow:0 12px 30px rgba(0,0,0,0.2);
-
-  overflow:hidden;
-
-  transition:0.6s;
-}
-
-/* TAMPA */
-.top{
-  position:absolute;
-
-  width:100%;
-  height:110px;
-
-  background:#ff8fb1;
-
-  clip-path:polygon(0 0,100% 0,50% 100%);
-
-  transform-origin:top;
-
-  transition:0.6s;
-
-  z-index:5;
-}
-
-/* CARTA */
-.letter{
-  position:absolute;
-
-  width:90%;
-  height:88%;
-
-  left:5%;
-  top:8%;
-
-  background:white;
-
-  border-radius:15px;
-
-  padding:15px;
-
-  text-align:center;
-
-  overflow:auto;
-
-  transition:0.6s;
-}
-
-/* TÍTULO */
-.letter h1{
-  color:#ff4f8b;
-
-  margin-bottom:10px;
-
-  font-size:22px;
-}
-
-/* TEXTO */
-.letter p{
-  color:#555;
-
-  font-size:15px;
-
-  margin-bottom:12px;
-
-  line-height:1.4;
-}
-
-/* VIDEO */
-video{
-  width:100%;
-
-  max-height:180px;
-
-  border-radius:12px;
-
-  object-fit:cover;
-}
-
-/* BOTÃO CORAÇÃO */
-.btn{
-  position:absolute;
-
-  bottom:-22px;
-
-  width:70px;
-  height:70px;
-
-  background:#ff2e74;
-
-  transform:rotate(-45deg);
-
-  cursor:pointer;
-
-  transition:0.3s;
-
-  z-index:10;
-}
-
-.btn::before,
-.btn::after{
-  content:"";
-
-  position:absolute;
-
-  width:70px;
-  height:70px;
-
-  background:#ff2e74;
-
-  border-radius:50%;
-}
-
-.btn::before{
-  top:-35px;
-  left:0;
-}
-
-.btn::after{
-  left:35px;
-  top:0;
-}
-
-/* EFEITO */
-.btn:hover{
-  transform:rotate(-45deg) scale(1.1);
-
-  filter:brightness(1.1);
-}
-
-.btn:active{
-  transform:rotate(-45deg) scale(0.95);
-}
-
-/* ABRIR CARTA */
-.open .top{
-  transform:rotateX(180deg);
-}
-
-.open .letter{
-  transform:translateY(-60px);
-}
-
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- CORAÇÕES -->
-<div id="hearts"></div>
+  <div class="container">
 
-<!-- CARTA -->
-<div class="container" id="container">
+    <!-- FOTO -->
+    <img src="foto1.jpeg" class="foto">
 
-  <div class="envelope">
+    <!-- ENVELOPE -->
+    <div class="envelope" onclick="abrirCarta()">
 
-    <div class="top"></div>
+      <div class="tampa"></div>
 
-    <div class="letter">
+      <div class="corpo"></div>
 
-      <h1>Para Você 💖</h1>
+      <div class="coracao">❤️</div>
 
-      <p>
-        Você é uma pessoa muito especial ✨<br><br>
+      <!-- CARTA -->
+      <div class="carta">
 
-        Espero que esse pequeno carinho consiga deixar
-        seu dia mais feliz e cheio de amor 💕
-      </p>
+        <p>Mãe, minha flor, minha rainha! 💖</p>
 
-      <!-- VIDEO -->
-      <video controls>
-        <source src="WhatsApp Video 2026-05-11 at 00.01.40.mp4" type="video/mp4">
-      </video>
+        <!-- VIDEO -->
+        <div class="video-container">
+
+          <video controls>
+            <source src="video.mp4" type="video/mp4">
+          </video>
+
+        </div>
+
+      </div>
 
     </div>
 
   </div>
 
-  <!-- BOTÃO -->
-  <div class="btn" id="btn"></div>
-
-</div>
-
-<script>
-
-const btn = document.getElementById("btn");
-
-const container = document.getElementById("container");
-
-const hearts = document.getElementById("hearts");
-
-let aberto = false;
-
-let intervalo;
-
-/* ABRIR */
-btn.addEventListener("click", () => {
-
-  aberto = !aberto;
-
-  container.classList.toggle("open");
-
-  if(aberto){
-
-    iniciarCoracoes();
-
-  }else{
-
-    pararCoracoes();
-
-  }
-
-});
-
-/* CRIAR CORAÇÃO */
-function criarCoracao(){
-
-  const heart = document.createElement("div");
-
-  heart.classList.add("heart");
-
-  heart.innerHTML = "❤";
-
-  heart.style.left = Math.random() * 100 + "vw";
-
-  heart.style.fontSize = Math.random() * 20 + 20 + "px";
-
-  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-
-  hearts.appendChild(heart);
-
-  setTimeout(() => {
-
-    heart.remove();
-
-  },6000);
-
-}
-
-/* INICIAR */
-function iniciarCoracoes(){
-
-  intervalo = setInterval(criarCoracao,300);
-
-}
-
-/* PARAR */
-function pararCoracoes(){
-
-  clearInterval(intervalo);
-
-}
-
-</script>
+  <script src="script.js"></script>
 
 </body>
 </html>
