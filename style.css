@@ -143,8 +143,7 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 
   box-sizing: border-box;
-}
-
+  
 /* CARTA ABERTA */
 .envelope.aberto .carta {
   transform: translateX(-50%) translateY(-180px);
